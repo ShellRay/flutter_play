@@ -1,8 +1,63 @@
+import 'dart:async';
+
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_play/model/search_history.dart';
+import 'package:flutter_play/routers/application.dart';
+import 'package:flutter_play/routers/routers.dart';
+import 'package:flutter_play/utils/data_utils.dart';
+import 'package:flutter_play/utils/provider.dart';
+import 'package:flutter_play/utils/shared_preferences.dart';
+import 'package:flutter_play/views/login_page.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-void main() => runApp(MyApp());
+import 'model/widget.dart';
 
-class MyApp extends StatelessWidget {
+SpUtil sp;
+var db;
+
+class MyApp extends StatefulWidget{
+
+  MyApp(){
+
+    final router = new Router();
+    Routes.configureRoutes(router);
+    // 这里设置项目环境
+    Application.router = router;
+  }
+
+  _MyAppState createState() => _MyAppState();
+
+
+}
+
+void main() async{
+  final provider = new Provider();
+  await provider.init(true);
+  sp = await SpUtil.getInstance();
+  new SearchHistoryList(sp);
+
+//  await DataUtils.getWidgetTreeList().then((List json) {
+//    List data = WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
+//    Application.widgetTree = WidgetTree.buildWidgetTree(data);
+//    print("Application.widgetTree>>>> ${Application.widgetTree}");
+//  });
+  db = Provider.db;
+
+      runApp(MyApp());
+
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _hasLogin = false;
+  bool _isLoading = true;
+
+//  UserInformation _userInfo;
+  bool isConnected = false;
+  String registrationId;
+  List notificationList = [];
+  int themeColor = 0xFF45b97c;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,8 +75,39 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new Scaffold(body: showWelcomePage()),//MyHomePage(title: 'Flutter Demo Home Page'),
+
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: Application.router.generator,
+//      navigatorObservers: <NavigatorObserver>[Analytics.observer],
     );
+    }
+
+  showWelcomePage() {
+    return LoginPage();
+
+//    return Container(
+//      color: Color(this.themeColor),
+//      child: Center(
+//        加载中图
+//        有许多例子SpinKit+ Wave CubeGrid ChasingDots FoldingCube
+//        child: SpinKitWave(color: Colors.white,size: 70),
+//      ),
+//
+//    );
+
+    const timeout = const Duration(seconds: 5);
+    Timer(timeout, () {
+    //到时回调
+        // 判断是否已经登录
+        if (_hasLogin) {
+//        return AppPage(_userInfo);
+        } else {
+        return LoginPage();
+        }
+
+    });
+
   }
 }
 
