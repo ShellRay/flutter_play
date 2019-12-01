@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_play/model/widget.dart';
 import 'package:flutter_play/utils/shared_preferences.dart';
 
 
@@ -14,14 +15,9 @@ class Application {
   static Router router;
   static TabController controller;
   static SpUtil sharePeference;
-//  static CategoryComponent widgetTree;
+  static CategoryComponent widgetTree;//包含本地资源的视图
   static bool pageIsOpen = false;
 
-  static Map<String, String> github = {
-    'widgetsURL':'https://github.com/alibaba/flutter-go/blob/develop/lib/widgets/',
-    //'develop':'https://github.com/alibaba-paimai-frontend/flutter-common-widgets-app/tree/develop/lib/widgets/',
-    //'master':'https://github.com/alibaba-paimai-frontend/flutter-common-widgets-app/tree/master/lib/widgets/'
-  };
 
   /// 所有获取配置的唯一入口
   Map<String, String> get config {

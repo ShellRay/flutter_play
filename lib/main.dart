@@ -12,6 +12,7 @@ import 'package:flutter_play/views/login_page.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'model/widget.dart';
+import 'standard_pages/index.dart';
 
 SpUtil sp;
 var db;
@@ -37,11 +38,11 @@ void main() async{
   sp = await SpUtil.getInstance();
   new SearchHistoryList(sp);
 
-//  await DataUtils.getWidgetTreeList().then((List json) {
-//    List data = WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
-//    Application.widgetTree = WidgetTree.buildWidgetTree(data);
-//    print("Application.widgetTree>>>> ${Application.widgetTree}");
-//  });
+  await DataUtils.getWidgetTreeList().then((List json) {
+    List data = WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
+    Application.widgetTree = WidgetTree.buildWidgetTree(data);
+    print("Application.widgetTree>>>> ${Application.widgetTree}");
+  });
   db = Provider.db;
 
       runApp(MyApp());

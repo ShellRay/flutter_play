@@ -44,6 +44,8 @@ dependencies:
   open_file: ^2.0.1+2
   package_info: ^0.4.0
   path: ^1.5.1
+  #加载图片
+  transparent_image: ^0.1.0
 
 dev_dependencies:
   flutter_test:

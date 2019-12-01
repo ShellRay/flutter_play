@@ -9,7 +9,6 @@ import 'package:flutter_play/utils/data_utils.dart';
 import 'discover_page/discover_page.dart';
 import 'home_page/home_page.dart';
 import 'hot_list_page/hot_list_page.dart';
-import 'login_page.dart';
 import 'personal_center_page/personal_center_page.dart';
 
 class MainPage extends StatefulWidget{
@@ -57,7 +56,6 @@ class _HomePage extends State<MainPage>{
     ..add(HotListPage())
     ..add(DiscoverPage())
     ..add(PersonalCenterPage());
-//    ..add(LoginPage());
 
   }
   @override
