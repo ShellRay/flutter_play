@@ -39,9 +39,12 @@ void main() async{
   new SearchHistoryList(sp);
 
   await DataUtils.getWidgetTreeList().then((List json) {
-    List data = WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
-    Application.widgetTree = WidgetTree.buildWidgetTree(data);
-    print("Application.widgetTree>>>> ${Application.widgetTree}");
+    if(json != null) {
+      List data = WidgetTree.insertDevPagesToList(
+          json, StandardPages().getLocalList());
+      Application.widgetTree = WidgetTree.buildWidgetTree(data);
+      print("Application.widgetTree>>>> ${Application.widgetTree}");
+    }
   });
   db = Provider.db;
 

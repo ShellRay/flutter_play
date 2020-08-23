@@ -79,10 +79,12 @@ class _HomePage extends State<HomePage>{
           print('第 $pos 点击了');
         },
       ));
-
-      Application.widgetTree.children.forEach((dynamic item) {
-        tiles.add(new CateCard(category: item));
-      });
+// 由于网址ip暂时不能请求
+      if(Application.widgetTree != null) {
+        Application.widgetTree.children.forEach((dynamic item) {
+          tiles.add(new CateCard(category: item));
+        });
+      }
       return new ListView.builder(
 //        children: tiles,
         itemCount: tiles.length + 1,
@@ -140,6 +142,10 @@ class _HomePage extends State<HomePage>{
 
   //加载更多widget
   Widget _buildLoadMore() {
+//    Future.delayed(Duration(seconds: 5), () {
+//      setState(() {
+//      });
+//    });
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -174,7 +180,7 @@ class _HomePage extends State<HomePage>{
     );
   }
 
-  bool _hasMore = false;
+  bool _hasMore = true;
   bool isLoading = true;
 
 // 上提加载loading的widget,如果数据到达极限，显示没有更多
