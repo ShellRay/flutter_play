@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:fluro/fluro.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_play/model/search_history.dart';
 import 'package:flutter_play/resouces/widget_name_to_icon.dart';
 import 'package:flutter_play/routers/application.dart';
 
-
 typedef String FormFieldFormatter<T>(T v);
 typedef bool MaterialSearchFilter<T>(T v, String c);
 typedef int MaterialSearchSort<T>(T a, T b, String c);
@@ -15,8 +13,7 @@ typedef Future<List<MaterialSearchResult>> MaterialResultsFinder(String c);
 typedef void OnSubmit(String value);
 
 ///搜索框
-class SearchInput extends StatelessWidget{
-
+class SearchInput extends StatelessWidget {
   final getResults;
 
   final ValueChanged<String> onSubmitted;
@@ -29,49 +26,41 @@ class SearchInput extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Container(
-
       height: 40,
       decoration: BoxDecoration(
-
-        color: Theme.of(context).backgroundColor,
-
-        borderRadius: BorderRadius.circular(5)),
-
-        child: new Row(
-          children: <Widget>[
-            new Padding(
-              padding: new EdgeInsets.only(right: 16.0, top: 3.0, left: 16.0),
-              child: new Icon(Icons.search,size: 25.0,color: Colors.grey,),
+          color: Theme.of(context).backgroundColor,
+          borderRadius: BorderRadius.circular(5)),
+      child: new Row(
+        children: <Widget>[
+          new Padding(
+            padding: new EdgeInsets.only(right: 16.0, top: 3.0, left: 16.0),
+            child: new Icon(
+              Icons.search,
+              size: 25.0,
+              color: Colors.grey,
             ),
-
-            new Expanded(child:
+          ),
+          new Expanded(
+              child:
 //            new Text(
 //              "search your want ！",
 //                style: Theme.of(context).textTheme.subhead),
-            //搜索界面
-              new MaterialSearchInput(
-              placeholder: 'search your want ！',
-              getResults: getResults,
-            )
-            ),
-          ],
-        ),
-
-      );
-
+                  //搜索界面
+                  new MaterialSearchInput(
+            placeholder: 'search your want ！',
+            getResults: getResults,
+          )),
+        ],
+      ),
+    );
   }
-
 }
 
 ///搜索结果内容显示面板
 class MaterialSearchResult<T> extends StatelessWidget {
-  const MaterialSearchResult({
-    Key key,
-    this.value,
-    this.text,
-    this.icon,
-    this.onTap
-  }) : super(key: key);
+  const MaterialSearchResult(
+      {Key key, this.value, this.text, this.icon, this.onTap})
+      : super(key: key);
 
   final String value;
   final VoidCallback onTap;
@@ -80,7 +69,6 @@ class MaterialSearchResult<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return new InkWell(
       onTap: this.onTap,
       child: new Container(
@@ -88,8 +76,14 @@ class MaterialSearchResult<T> extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
         child: new Row(
           children: <Widget>[
-            new Container(width: 30.0, margin: EdgeInsets.only(right: 10), child: new Icon(icon)) ?? null,
-            new Expanded(child: new Text(value, style: Theme.of(context).textTheme.subhead)),
+            new Container(
+                    width: 30.0,
+                    margin: EdgeInsets.only(right: 10),
+                    child: new Icon(icon)) ??
+                null,
+            new Expanded(
+                child: new Text(value,
+                    style: Theme.of(context).textTheme.subhead)),
             new Text(text, style: Theme.of(context).textTheme.subhead)
           ],
         ),
@@ -97,7 +91,6 @@ class MaterialSearchResult<T> extends StatelessWidget {
     );
   }
 }
-
 
 ///搜索界面A
 class MaterialSearchInput<T> extends StatefulWidget {
@@ -132,18 +125,17 @@ class MaterialSearchInput<T> extends StatefulWidget {
       new _MaterialSearchInputState<T>();
 }
 
-
 ///搜索界面B
 class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
   GlobalKey<FormFieldState<T>> _formFieldKey =
-  new GlobalKey<FormFieldState<T>>();
-///创建搜索界面
+      new GlobalKey<FormFieldState<T>>();
+
+  ///创建搜索界面
   _buildMaterialSearchPage(BuildContext context) {
     print("创建带有路由的搜索界面");
     return new _MaterialSearchPageRoute<T>(
         settings: new RouteSettings(
           name: 'material_search',
-          isInitialRoute: false,
         ),
         builder: (BuildContext context) {
           print("展示搜索界面并创建builder");
@@ -157,10 +149,8 @@ class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
               onSelect: (dynamic value) => Navigator.of(context).pop(value),
             ),
           );
-
         });
   }
-
 
   _showMaterialSearch(BuildContext context) {
     print("展示搜索界面");
@@ -205,10 +195,10 @@ class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
             child: _isEmpty(field)
                 ? null
                 : new Text(
-                widget.formatter != null
-                    ? widget.formatter(field.value)
-                    : field.value.toString(),
-                style: valueStyle),
+                    widget.formatter != null
+                        ? widget.formatter(field.value)
+                        : field.value.toString(),
+                    style: valueStyle),
           );
         },
       ),
@@ -218,7 +208,6 @@ class _MaterialSearchInputState<T> extends State<MaterialSearchInput<T>> {
 
 ///带有路由的搜索界面
 class _MaterialSearchPageRoute<T> extends MaterialPageRoute<T> {
-
   _MaterialSearchPageRoute({
     @required WidgetBuilder builder,
     RouteSettings settings: const RouteSettings(),
@@ -226,10 +215,10 @@ class _MaterialSearchPageRoute<T> extends MaterialPageRoute<T> {
     bool fullscreenDialog: false,
   })  : assert(builder != null),
         super(
-          builder: builder,
-          settings: settings,
-          maintainState: maintainState,
-          fullscreenDialog: fullscreenDialog);
+            builder: builder,
+            settings: settings,
+            maintainState: maintainState,
+            fullscreenDialog: fullscreenDialog);
 }
 
 ///输入框状态 及清空按钮监听
@@ -309,6 +298,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
     super.dispose();
     _resultsTimer?.cancel();
   }
+
   Widget buildBody(List results) {
     print("查询结果");
     if (_criteria.isEmpty) {
@@ -317,16 +307,11 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
       return new Center(
           child: new Padding(
               padding: const EdgeInsets.only(top: 50.0),
-              child: new CircularProgressIndicator()
-          )
-      );
+              child: new CircularProgressIndicator()));
     }
     if (results.isNotEmpty) {
-      var content = new SingleChildScrollView(
-          child: new Column(
-              children: results
-          )
-      );
+      var content =
+          new SingleChildScrollView(child: new Column(children: results));
       return content;
     }
     return Center(child: Text("暂无数据"));
@@ -335,7 +320,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
   @override
   Widget build(BuildContext context) {
     var results =
-    (widget.results ?? _results).where((MaterialSearchResult result) {
+        (widget.results ?? _results).where((MaterialSearchResult result) {
       if (widget.filter != null) {
         return widget.filter(result.value, _criteria);
       }
@@ -355,7 +340,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
     results = results.take(widget.limit).toList();
 
     IconThemeData iconTheme =
-    Theme.of(context).iconTheme.copyWith(color: widget.iconColor);
+        Theme.of(context).iconTheme.copyWith(color: widget.iconColor);
 
     return new Scaffold(
       appBar: new AppBar(
@@ -366,7 +351,7 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
           controller: _controller,
           autofocus: true,
           decoration:
-          new InputDecoration.collapsed(hintText: widget.placeholder),
+              new InputDecoration.collapsed(hintText: widget.placeholder),
           style: Theme.of(context).textTheme.title,
           onSubmitted: (String value) {
             if (widget.onSubmit != null) {
@@ -377,19 +362,18 @@ class _MaterialSearchState<T> extends State<MaterialSearch> {
         actions: _criteria.length == 0
             ? []
             : [
-          new IconButton(
-              icon: new Icon(Icons.clear),
-              onPressed: () {
-                setState(() {
-                  _controller.text = _criteria = '';
-                });
-              }),
-        ],
+                new IconButton(
+                    icon: new Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        _controller.text = _criteria = '';
+                      });
+                    }),
+              ],
       ),
       body: buildBody(results),
     );
   }
-
 }
 
 ///print("展示搜索界面并创建builder");
@@ -408,14 +392,14 @@ class MaterialSearch<T> extends StatefulWidget {
     this.iconColor = Colors.black,
     this.leading,
   })  : assert(() {
-    if (results == null && getResults == null ||
-        results != null && getResults != null) {
-      throw new AssertionError(
-          'Either provide a function to get the results, or the results.');
-    }
+          if (results == null && getResults == null ||
+              results != null && getResults != null) {
+            throw new AssertionError(
+                'Either provide a function to get the results, or the results.');
+          }
 
-    return true;
-  }()),
+          return true;
+        }()),
         super(key: key);
 
   final String placeholder;
@@ -439,7 +423,7 @@ class History extends StatefulWidget {
   const History() : super();
 
   @override
-  _History  createState() => _History();
+  _History createState() => _History();
 }
 
 // AppBar 默认的实例,有状态
@@ -455,13 +439,13 @@ class _History extends State<History> {
   void dispose() {
     super.dispose();
   }
+
   buildChips(BuildContext context) {
     List<Widget> list = [];
     List<SearchHistory> historyList = searchHistoryList.getList();
     print("historyList> $historyList");
     Color bgColor = Theme.of(context).primaryColor;
     historyList.forEach((SearchHistory value) {
-
       Widget icon = CircleAvatar(
         backgroundColor: bgColor,
         child: Text(
@@ -474,20 +458,21 @@ class _History extends State<History> {
       }
       String targetRouter = value.targetRouter;
 
-      list.add(
-          InkWell(
-            onTap: () {
-              Application.router.navigateTo(context, "${targetRouter.toLowerCase()}", transition: TransitionType.inFromRight);
-            },
-            child: Chip(
-              avatar: icon,
-              label: Text("${value.name}"),
-            ),
-          )
-      );
+      list.add(InkWell(
+        onTap: () {
+          Application.router.navigateTo(
+              context, "${targetRouter.toLowerCase()}",
+              transition: TransitionType.inFromRight);
+        },
+        child: Chip(
+          avatar: icon,
+          label: Text("${value.name}"),
+        ),
+      ));
     });
     return list;
   }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> childList = buildChips(context);
@@ -514,8 +499,7 @@ class _History extends State<History> {
           child: Wrap(
               spacing: 6.0, // gap between adjacent chips
               runSpacing: 0.0, // gap between lines
-              children: childList
-          ),
+              children: childList),
         )
       ],
     );

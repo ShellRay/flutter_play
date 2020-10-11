@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -13,15 +11,12 @@ const MAX_COUNT = 0x7fffffff;
 ///
 typedef void OnBannerItemClick(int position, BannerItem entity);
 
-
 ///
 /// 自定义ViewPager的每个页面显示
 ///
 typedef Widget CustomBuild(int position, BannerItem entity);
 
-
-class BannerWidget extends StatefulWidget{
-
+class BannerWidget extends StatefulWidget {
   final double height;
   final List<BannerItem> datas;
   int duration;
@@ -36,22 +31,20 @@ class BannerWidget extends StatefulWidget{
 
   BannerWidget(double this.height, List<BannerItem> this.datas,
       {Key key,
-        int this.duration = 5000,
-        double this.pointRadius = 3.0,
-        Color this.selectedColor = Colors.lightBlue,
-        Color this.unSelectedColor = Colors.white,
-        Color this.textBackgroundColor = const Color(0x99fffffff),
-        bool this.isHorizontal = true,
-        OnBannerItemClick this.bannerPress,
-        CustomBuild this.build})
+      int this.duration = 5000,
+      double this.pointRadius = 3.0,
+      Color this.selectedColor = Colors.lightBlue,
+      Color this.unSelectedColor = Colors.white,
+      Color this.textBackgroundColor = const Color(0x99fffffff),
+      bool this.isHorizontal = true,
+      OnBannerItemClick this.bannerPress,
+      CustomBuild this.build})
       : super(key: key);
 
   BannerState createState() => new BannerState();
-
 }
 
-class BannerState extends State<BannerWidget>{
-
+class BannerState extends State<BannerWidget> {
   Timer timer;
   int selectedIndex = 0;
   PageController controller;
@@ -79,7 +72,9 @@ class BannerState extends State<BannerWidget>{
   start() {
     stop();
     timer = Timer.periodic(Duration(milliseconds: widget.duration), (timer) {
-      if(widget.datas.length > 0 && controller != null && controller.page != null) {
+      if (widget.datas.length > 0 &&
+          controller != null &&
+          controller.page != null) {
         controller.animateToPage(controller.page.toInt() + 1,
             duration: Duration(milliseconds: 300), curve: Curves.linear);
       }
@@ -102,7 +97,7 @@ class BannerState extends State<BannerWidget>{
     return new Container(
       height: widget.height,
       color: Colors.black12,
-      padding: const EdgeInsets.only( top: 1.0),
+      padding: const EdgeInsets.only(top: 1.0),
       child: Stack(
         children: <Widget>[
           getViewPager(),
@@ -134,12 +129,12 @@ class BannerState extends State<BannerWidget>{
             },
             child: widget.build == null
                 ? FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image:
-                widget.datas[index % widget.datas.length].itemImagePath,
-                fit: BoxFit.cover)
+                    placeholder: kTransparentImage,
+                    image:
+                        widget.datas[index % widget.datas.length].itemImagePath,
+                    fit: BoxFit.cover)
                 : widget.build(
-                index, widget.datas[index % widget.datas.length]));
+                    index, widget.datas[index % widget.datas.length]));
       },
     );
   }
@@ -147,16 +142,19 @@ class BannerState extends State<BannerWidget>{
   Widget getSelectedIndexTextWidget() {
     return widget.datas.length > 0 && selectedIndex < widget.datas.length
         ? widget.datas[selectedIndex].itemText
-        : Text('');
+        : Text(
+            '',
+          );
   }
 
   Widget getBannerTextInfoWidget() {
     if (widget.isHorizontal) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,//摆放位置 前提是expanded中的widget权重占一个
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween, //摆放位置 前提是expanded中的widget权重占一个
         children: <Widget>[
           new Expanded(
-            flex: 1,//默认一等分。类似LinearLayout中的weight=1
+            flex: 1, //默认一等分。类似LinearLayout中的weight=1
             child: getSelectedIndexTextWidget(),
           ),
           Expanded(
@@ -205,5 +203,4 @@ class BannerState extends State<BannerWidget>{
     selectedIndex = index % widget.datas.length;
     setState(() {});
   }
-
 }

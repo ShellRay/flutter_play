@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:fluro/fluro.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_play/model/search_history.dart';
 import 'package:flutter_play/routers/application.dart';
 import 'package:flutter_play/routers/routers.dart';
@@ -17,10 +17,8 @@ import 'standard_pages/index.dart';
 SpUtil sp;
 var db;
 
-class MyApp extends StatefulWidget{
-
-  MyApp(){
-
+class MyApp extends StatefulWidget {
+  MyApp() {
     final router = new Router();
     Routes.configureRoutes(router);
     // 这里设置项目环境
@@ -28,28 +26,27 @@ class MyApp extends StatefulWidget{
   }
 
   _MyAppState createState() => _MyAppState();
-
-
 }
 
-void main() async{
+void main() async {
+  //在runApp()之前如果访问二进制文件或者初始化插件，需要先调用WidgetsFlutterBinding.ensureInitialized() 。
+  WidgetsFlutterBinding.ensureInitialized();
   final provider = new Provider();
   await provider.init(true);
   sp = await SpUtil.getInstance();
   new SearchHistoryList(sp);
 
   await DataUtils.getWidgetTreeList().then((List json) {
-    if(json != null) {
-      List data = WidgetTree.insertDevPagesToList(
-          json, StandardPages().getLocalList());
+    if (json != null) {
+      List data =
+          WidgetTree.insertDevPagesToList(json, StandardPages().getLocalList());
       Application.widgetTree = WidgetTree.buildWidgetTree(data);
       print("Application.widgetTree>>>> ${Application.widgetTree}");
     }
   });
   db = Provider.db;
 
-      runApp(MyApp());
-
+  runApp(MyApp());
 }
 
 class _MyAppState extends State<MyApp> {
@@ -79,13 +76,15 @@ class _MyAppState extends State<MyApp> {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new Scaffold(body: showWelcomePage()),//MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new Scaffold(
+          body:
+              showWelcomePage()), //MyHomePage(title: 'Flutter Demo Home Page'),// 应用程序默认路由的小部件,用来定义当前应用打开的时候，所显示的界面
 
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true, //是否展示debug模式
       onGenerateRoute: Application.router.generator,
 //      navigatorObservers: <NavigatorObserver>[Analytics.observer],
     );
-    }
+  }
 
   showWelcomePage() {
     return LoginPage();
@@ -102,16 +101,14 @@ class _MyAppState extends State<MyApp> {
 
     const timeout = const Duration(seconds: 5);
     Timer(timeout, () {
-    //到时回调
-        // 判断是否已经登录
-        if (_hasLogin) {
+      //到时回调
+      // 判断是否已经登录
+      if (_hasLogin) {
 //        return AppPage(_userInfo);
-        } else {
+      } else {
         return LoginPage();
-        }
-
+      }
     });
-
   }
 }
 

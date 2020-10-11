@@ -1,54 +1,26 @@
-
-
-
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_play/bean/recomend_item_bean%20copy.dart';
+
+import 'Item.dart';
 
 /**
- * 发现 - 发现
+ * 发现 - 直播
  * */
-class DiscoverDiscoverPage extends StatefulWidget {
-  DiscoverDiscoverPage();
+class DiscoverLivePage extends StatefulWidget {
+  DiscoverLivePage();
 
-  _DiscoverDiscoverPage createState() => _DiscoverDiscoverPage();
+  _DiscoverLivePage createState() => _DiscoverLivePage();
 }
 
-class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
-
+class _DiscoverLivePage extends State<DiscoverLivePage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return new ListView.builder(
-
-      itemCount: 1,
-      itemBuilder: (context, i) {
-        // 最后一个单词对
-        if (i == 0) {
-          return _buildHeaderItem();
-        }else{
-
-        }
-      },
-
+    return Expanded(
+      child: CustomScrollView(slivers: <Widget>[
+        SliverPadding(
+          padding: EdgeInsets.all(10),
+        ),
+      ]),
     );
   }
-
-  Widget _buildHeaderItem() {
-
-    return new Column(
-
-      children: <Widget>[
-
-        new Row(),
-        new Row(),
-        new Row(),
-        new Row(),
-
-      ],
-
-    );
-
-  }
-
 }
-
