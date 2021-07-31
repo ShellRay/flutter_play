@@ -2,6 +2,8 @@ import 'dart:async' show Future;
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter_play/api/api.dart';
+import 'package:flutter_play/bean/home_entity.dart';
+import 'package:flutter_play/constans/string.dart';
 import 'package:flutter_play/model/collection.dart';
 import 'package:flutter_play/model/version.dart';
 import 'package:flutter_play/model/widget.dart';
@@ -11,6 +13,10 @@ import 'package:package_info/package_info.dart';
 
 import './net_utils.dart';
 import '../model/user_info.dart';
+
+typedef OnFail(String message);
+
+typedef OnSuccess<T>(T successData);
 
 class DataUtils {
   // 登陆获取用户信息
@@ -187,13 +193,30 @@ class DataUtils {
           "name": json['name'],
           "cnName": json['name'],
           "routerName": routerName,
-          "catId": json['parentId'].runtimeType == String ? int.parse(json['parentId']) : json['parentId']
+          "catId": json['parentId'].runtimeType == String
+              ? int.parse(json['parentId'])
+              : json['parentId']
         };
         list.add(WidgetPoint.fromJSON(tempMap));
       }
       return list;
     } else {
       return [];
+    }
+  }
+
+  static Future queryHomeData(OnSuccess onSuccess, OnFail onFail) async {
+    try {
+      var response = await NetUtils.get(Api.HOME_URL);
+      if (response['errno'] == 0) {
+        HomeEntity homeEntity = HomeEntity.fromJson(response['data']);
+        onSuccess(homeEntity);
+      } else {
+        onFail(response['errmsg']);
+      }
+    } catch (e) {
+      print(e);
+      onFail(Strings.SERVER_EXCEPTION);
     }
   }
 }

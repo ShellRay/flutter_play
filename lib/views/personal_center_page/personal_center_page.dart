@@ -12,7 +12,7 @@ class PersonalCenterPage extends StatefulWidget {
 
 class _PersonalCenterPage extends State<PersonalCenterPage> {
    String userAvatar =
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598370655632&di=e7c22fa21b30e2f5030216bd36e9d9f2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201508%2F18%2F20150818213048_vAdhz.jpeg";
+      "https://img2.baidu.com/it/u=1678948314,1083480950&fm=26&fmt=auto&gp=0.jpg";
    var userName;
 
    var items=["红包签到","会员中心","私房红包","U先试用","我的服务","领券中心","天天夺宝","设置中心"];
@@ -37,7 +37,7 @@ class _PersonalCenterPage extends State<PersonalCenterPage> {
 
         new SliverAppBar(
           pinned: true,
-          expandedHeight: 200.0,
+          expandedHeight: 240.0,
           primary: true,
           //是否显示在状态栏的下面,false就会占领状态栏的高度 指的的是标题栏部分
           backgroundColor: Colors.cyanAccent,
@@ -216,7 +216,7 @@ class _PersonalCenterPage extends State<PersonalCenterPage> {
                  children: <Widget>[
                    new Container(
                      margin:
-                     const EdgeInsets.fromLTRB(0.0, 50.0, 100.0, 0.0),
+                     const EdgeInsets.fromLTRB(0.0, 40.0, 100.0, 0.0),
                      child: new InkWell(
                          child: new Icon(
                            Icons.settings,

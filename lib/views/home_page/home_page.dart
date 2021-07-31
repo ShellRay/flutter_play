@@ -23,7 +23,7 @@ class _HomePage extends State<HomePage>{
     // TODO: implement initState
 
     BannerItem item = BannerItem.defaultBannerItem(
-        '''http://pic39.nipic.com/20140327/17556992_134152074389_2.jpg''',
+        '''https://img1.baidu.com/it/u=1821367333,2020547634&fm=26&fmt=auto&gp=0.jpg''',
         '''唯美护眼''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(
@@ -31,11 +31,11 @@ class _HomePage extends State<HomePage>{
         '''模特''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(
-        '''https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567931119923&di=ffb6498cd7c48f9aaac3cc9b1626ac67&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftransform%2F20150504%2Fo5UQ-cczmvup1016017.jpg''',
+        '''https://img1.baidu.com/it/u=4050605575,3009301072&fm=26&fmt=auto&gp=0.jpg''',
         '''斯嘉丽''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(
-        '''http://09.imgmini.eastday.com/mobile/20180413/0bf718e8510ab05fd6d40b2b07a8a809_wmk.jpeg''',
+        '''https://img1.baidu.com/it/u=4050605575,3009301072&fm=26&fmt=auto&gp=0.jpg''',
         '''卡哇伊 伦纳德''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(

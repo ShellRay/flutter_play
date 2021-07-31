@@ -19,6 +19,7 @@ class Routes {
   static String collectionPage = '/collection-page';
   static String collectionFullPage = '/collection-full-page';
   static String standardPage = '/standard-page/:id';
+  static String webView = "/webView";
 
   static void configureRoutes(Router router) {
     List widgetDemosList = new WidgetDemoList().getDemos();

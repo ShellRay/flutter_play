@@ -123,7 +123,7 @@ class _DiscoverPage extends State<DiscoverPage>
             Center(child: DiscoverLivePage()),
             Center(child: DiscoverNearlyPage()),
           ]),
-          height: MediaQuery.of(context).size.height - 80 - 56, //加底部tab高度
+          height: MediaQuery.of(context).size.height - 80 - 60, //加底部tab高度
         )
       ],
     );

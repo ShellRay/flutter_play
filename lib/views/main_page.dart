@@ -10,6 +10,7 @@ import 'package:flutter_play/utils/UiUtils.dart';
 import 'package:flutter_play/utils/data_utils.dart';
 import 'package:flutter_play/views/discover_page/scrollable_demo_State.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart';
 
 import 'discover_page/discover_page.dart';
 import 'discover_page/scrollable_demo_State.dart';
@@ -54,16 +55,16 @@ class _HomePage extends State<MainPage> {
         ),
       ));
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     _list
       ..add(HomePage())
       ..add(HotListPage())
       ..add(DiscoverPage())
       ..add(PersonalCenterPage());
-  }
 
-  @override
-  Widget build(BuildContext context) {
 //    Scaffold 主要的属性说明
 //    appBar：显示在界面顶部的一个 AppBar
 //    相关连接：https://flutterchina.club/catalog/samples/

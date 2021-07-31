@@ -15,31 +15,32 @@ class DiscoverDiscoverPage extends StatefulWidget {
   _DiscoverDiscoverPage createState() => _DiscoverDiscoverPage();
 }
 
-class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
+class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage>
+    with AutomaticKeepAliveClientMixin {
   List<String> headerUrlList = [
-    "https://i04piccdn.sogoucdn.com/34b924fab8e8fd75",
-    "https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81",
+    "https://img2.baidu.com/it/u=1267931373,3662510004&fm=26&fmt=auto&gp=0.jpg",
+    "https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg",
     "https://i02piccdn.sogoucdn.com/dab96183e4af5fa9"
   ];
 
   List<ImageTextBean> dataList = [
     new ImageTextBean(
-        "https://i04piccdn.sogoucdn.com/34b924fab8e8fd75", "京东超市"),
+        "https://img2.baidu.com/it/u=1267931373,3662510004&fm=26&fmt=auto&gp=0.jpg", "京东超市"),
     new ImageTextBean(
-        "https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81", "生活服务"),
+        "https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg", "生活服务"),
     new ImageTextBean(
         "https://i02piccdn.sogoucdn.com/dab96183e4af5fa9", "数码电气"),
-    new ImageTextBean("https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81", "领京豆"),
+    new ImageTextBean("https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg", "领京豆"),
     new ImageTextBean(
         "https://i02piccdn.sogoucdn.com/dab96183e4af5fa9", "潮流服饰"),
-    new ImageTextBean("https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81", "领券"),
+    new ImageTextBean("https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg", "领券"),
     new ImageTextBean(
-        "https://i04piccdn.sogoucdn.com/34b924fab8e8fd75", "京东生鲜"),
-    new ImageTextBean("https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81", "借钱"),
+        "https://img2.baidu.com/it/u=1267931373,3662510004&fm=26&fmt=auto&gp=0.jpg", "京东生鲜"),
+    new ImageTextBean("https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg", "借钱"),
     new ImageTextBean(
         "https://i02piccdn.sogoucdn.com/dab96183e4af5fa9", "京东到家"),
     new ImageTextBean(
-        "https://i04piccdn.sogoucdn.com/57b1acda3a4a8e81", "PLUS会员"),
+        "https://img2.baidu.com/it/u=1611641888,1284713904&fm=26&fmt=auto&gp=0.jpg", "PLUS会员"),
   ];
 
 // ListView嵌套GridView解决方案：（ListView嵌套ListView同理）
@@ -66,7 +67,7 @@ class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
         '''舒适生活''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(
-        '''https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567931119923&di=ffb6498cd7c48f9aaac3cc9b1626ac67&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftransform%2F20150504%2Fo5UQ-cczmvup1016017.jpg''',
+        '''https://img2.baidu.com/it/u=1267931373,3662510004&fm=26&fmt=auto&gp=0.jpg''',
         '''国际信任专享''');
     bannerList.add(item);
     item = BannerItem.defaultBannerItem(
@@ -158,6 +159,7 @@ class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
                 width: double.infinity,
                 child: GridView.builder(
                     padding: EdgeInsets.only(top: 8, bottom: 0),
+                    physics: new NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 5,
@@ -224,7 +226,6 @@ class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        alignment: Alignment(0, 0),
                         decoration: new BoxDecoration(
                           //背景
                           color: Colors.white,
@@ -389,4 +390,7 @@ class _DiscoverDiscoverPage extends State<DiscoverDiscoverPage> {
           ],
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

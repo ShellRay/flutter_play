@@ -33,4 +33,7 @@ class Api {
   static const String GET_WIDGET_TREE = BASE_URL + 'getCateList'; //获取widget列表树
 
   static const String SEARCH_WIDGET = BASE_URL + 'searchWidget'; //搜索组件
+
+  static const String HOME_URL =
+      'http://120.25.226.11:8080/mall-app/wx/home/index'; //
 }

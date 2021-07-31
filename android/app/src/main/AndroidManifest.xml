@@ -10,6 +10,12 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_play"
         android:icon="@mipmap/ic_launcher">
+        <!-- 解决 Your Flutter application is created using an older version of the Android
+embedding. It's being deprecated in favor of Android embedding v2. Follow the
+steps at -->
+        <!-- <meta-data
+           android:name="flutterEmbedding"
+            android:value="2" /> -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
