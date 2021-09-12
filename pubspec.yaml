@@ -52,7 +52,7 @@ dependencies:
   #提供了一种平台透明的方式来访问设备文件系统上的常用位置 两种：临时目录 文档目录
   path_provider: ^1.6.18
   #路由
-  fluro: "^1.6.3"
+  fluro: 1.6.3
   open_file: ^2.0.1+2
   package_info: ^0.4.0
   path: ^1.7.0

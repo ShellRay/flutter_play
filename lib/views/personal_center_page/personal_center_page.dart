@@ -40,7 +40,7 @@ class _PersonalCenterPage extends State<PersonalCenterPage> {
           expandedHeight: 240.0,
           primary: true,
           //是否显示在状态栏的下面,false就会占领状态栏的高度 指的的是标题栏部分
-          backgroundColor: Colors.cyanAccent,
+          backgroundColor: Colors.blue,
           leading: new IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {},
@@ -60,15 +60,17 @@ class _PersonalCenterPage extends State<PersonalCenterPage> {
             ),
           ],
 //          iconTheme: new IconThemeData(color: Colors.transparent),//标题栏的style 设置透明的话leading actions不会显示
-          flexibleSpace:
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.blueAccent, Colors.lightGreenAccent, Colors.yellowAccent],
+          flexibleSpace: new FlexibleSpaceBar(
+            background:
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blueAccent, Colors.lightGreenAccent, Colors.yellowAccent],
+                ),
               ),
+              child:_rengerSliverAppBarColumn(),
             ),
-            child:_rengerSliverAppBarColumn(),
-          ),
+          )
           //添加背景图片
 //          new FlexibleSpaceBar(
 //            background: Image.asset("assets/images/p2.png", fit: BoxFit.fill),
